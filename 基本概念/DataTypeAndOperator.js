@@ -1,0 +1,146 @@
+//ECMAScript定义6种数据类型：
+/*
+类型				值
+Undefined		undefined
+Null			null
+Boolean			true/false
+Number			双精度浮点数
+String			字符串
+Object			对象
+*/
+
+//typeof用于判定数据类型，可能的值
+/*
+undefined
+boolean
+string
+object
+function
+*/
+console.log(typeof "string");
+console.log(typeof 100);
+console.log(typeof null);
+console.log(typeof undefined);
+console.log(typeof true);
+
+
+//Undefined类型--使用var声明变量但没有初始化时值为undefined
+var undefStr;
+console.log(undefStr===undefined);
+//console.log(age);//产生错误，因为age没有声明
+console.log(typeof age);//
+
+
+//Null类型--
+/*
+从逻辑角度来看，null 值表示一个空对象指针，而这也正是使用typeof 操作符检测null 值时会返回"object"的原因
+，undefined 值是派生自null 值的，因此ECMA-262 规定对它们的相等性测试要返回true
+*/
+console.log(null==undefined);//true
+
+//Boolean类型：值true/false 区分大小写
+/*
+ECMAScript 中所有类型的值都有与这两个Boolean 值
+等价的值。要将一个值转换为其对应的Boolean 值，可以调用转型函数Boolean()
+转换规则
+类型				true				false
+String			任何非空字符串			""(空字符串)
+Number			非0数值				0和NaN
+Object			任何对象			   null
+Undefined		N/A					  undefined
+*/
+console.log('非空字符'+Boolean("123"));//true
+console.log("空字符"+Boolean(""));//false
+console.log("非0数值"+Boolean(1));//true
+console.log("0:"+Boolean(0));//falase
+console.log("Nan:"+Boolean(NaN));//false
+console.log("对象:"+Boolean({adsas:123}));//true
+console.log("Undefined:"+Boolean(undefined));//false
+
+//Number类型:双精度浮点数
+
+var intNum=10;
+var octNum=070;//八进制，第一位是0，表示十进制的56
+var hexNum=0xA;//十六进制，前两位是0x，后面是十六进制数字
+var eNum=3.125e7;//科学计数法：31250000
+
+//在进行算术计算时，所有以八进制和十六进制表示的数值最终都将被转换成十进制数值。
+
+console.log(Number.MAX_VALUE);//Number的最大值
+console.log(Number.MIN_VALUE);//Number的最小值
+console.log(Number.NaN);
+console.log(isFinite(Number.MAX_VALUE*2));//isFinite:判断数值是否在Number范围内
+
+//NaN：即非数值（Not a Number）是一个特殊的数值，这个数值用于表示一个本来要返回数值的操作数未返回数值的情况
+/*
+任何涉及NaN 的操作（例如NaN/10）都会返回NaN
+，NaN 与任何值都不相等，包括NaN 本身
+*/
+console.log("---------------")
+console.log(1/0);			  //正数除以0 返回Infinity
+console.log(-1/0);			  //负数除以0 返回-Infinity
+console.log(typeof Infinity);//Number
+console.log(typeof -Infinity);//Number
+console.log(Infinity==Infinity);//true
+console.log(Number.MAX_VALUE*2==Infinity);//true
+console.log(Number.MIN_VALUE*2==-Infinity);//false
+console.log(0/0);//NaN
+console.log(NaN+1);//NaN
+console.log(NaN==NaN);//false
+console.log("isNaN:"+isNaN(0/0));//true
+
+//Number()、parseInt()和parseFloat()
+//Number()
+/*
+转换规则
+Boolean：true：1；false：0
+数值：直接返回
+null:0
+undefined:NaN
+字符串的规则：
+1.只有数字(整数，浮点数)：直接转换；忽略八进制的前导0
+2.有效的十六进制：转换为对应的十进制
+3.空字符串：0
+4.不满足上述格式：NaN
+对象：
+调用valueOf()然后按照前面规则转换，如果返回NaN则调用toString再按前面规则转换
+*/
+console.log("----Number转各种类型-----")
+console.log("Boolean true:"+Number(true));//1
+console.log("Boolean false:"+Number(false));//0
+console.log("null:"+Number(null));//0
+console.log("undefined:"+Number(undefined));//NaN
+console.log("123:"+Number("123"));//123
+console.log("ASD123:"+Number("ASD123"));//NaN
+console.log("0XAF:",Number("0XAF"));//175
+console.log("'':"+Number(""));//0
+
+//paseInt(obj,[radix])
+/*
+radix:指定进制：8，10，16
+它会忽略字符串前面的空格，直至找到第一个非空格字符。如果第一个字符不是数字字符或者负号，parseInt()
+就会返回NaN；也就是说，用parseInt()转换空字符串会返回NaN（Number()对空字符返回0）。如
+果第一个字符是数字字符，parseInt()会继续解析第二个字符，直到解析完所有后续字符或者遇到了
+一个非数字字符
+*/
+console.log("------parseInt()------");
+console.log("123A:"+parseInt("123A"));//123
+console.log("'':"+parseInt(""));//NaN
+console.log("0xA:"+parseInt("0xA",16));
+console.log("070:"+parseInt("070",8));//56
+console.log("3.12e7:"+parseInt("3.12e7"));
+
+//parseFloat()
+/*
+parseFloat()只解析十进制值
+parseFloat()与parseInt()的第二个区别在于它始终都会忽略前导的零
+与parseInt()函数类似，parseFloat()也是从第一个字符（位置0）开始解析每个字符。而且
+也是一直解析到字符串末尾，或者解析到遇见一个无效的浮点数字字符为止。也就是说，字符串中的第
+一个小数点是有效的，而第二个小数点就是无效的了，因此它后面的字符串将被忽略
+十六进制格式的字符串则始终会被转换成0
+*/
+console.log("-----parseFloat-------")
+console.log("0xa:"+parseFloat("0xa"));//0
+console.log("22.33.33:"+parseFloat("22.33.33"));//22.33
+console.log("070");//70
+console.log("3.12e7:"+parseFloat("3.12e7"));//3120000
