@@ -114,6 +114,7 @@ console.log("123:"+Number("123"));//123
 console.log("ASD123:"+Number("ASD123"));//NaN
 console.log("0XAF:",Number("0XAF"));//175
 console.log("'':"+Number(""));//0
+console.log("3.12e7:"+Number("3.12e7"));//31200000
 
 //paseInt(obj,[radix])
 /*
@@ -126,9 +127,11 @@ radix:指定进制：8，10，16
 console.log("------parseInt()------");
 console.log("123A:"+parseInt("123A"));//123
 console.log("'':"+parseInt(""));//NaN
-console.log("0xA:"+parseInt("0xA",16));
+console.log("0xA:"+parseInt("0xA",16));//10
 console.log("070:"+parseInt("070",8));//56
-console.log("3.12e7:"+parseInt("3.12e7"));
+console.log("0xA:"+parseInt("0xA"));//10
+console.log("070:"+parseInt("070"));//70
+console.log("3.12e7:"+parseInt("3.12e7"));//3
 
 //parseFloat()
 /*
@@ -142,5 +145,75 @@ parseFloat()与parseInt()的第二个区别在于它始终都会忽略前导的�
 console.log("-----parseFloat-------")
 console.log("0xa:"+parseFloat("0xa"));//0
 console.log("22.33.33:"+parseFloat("22.33.33"));//22.33
-console.log("070");//70
+console.log("070:"+parseFloat("070"));//70
 console.log("3.12e7:"+parseFloat("3.12e7"));//3120000
+console.log("123ABC:"+parseFloat("123ABC"));//123
+console.log("ABC123:"+parseFloat("ABC123"));//NaN
+console.log("3.12e7:"+parseFloat("3.12e7"));//31200000
+
+
+//String类型：String 类型用于表示由零或多个16 位Unicode 字符(UTF16?)组成的字符序列，即字符串。
+/*
+字面量				 含义
+\n 					换行
+\t 					制表
+\b 					空格
+\r 					回车
+\f 					进纸
+\\ 					斜杠
+\' 					单引号（'），在用单引号表示的字符串中使用。例如：'He said, \'hey.\''
+\" 					双引号（"），在用双引号表示的字符串中使用。例如："He said, \"hey.\""
+\xnn 				以十六进制代码nn表示的一个字符（其中n为0～F）。例如，\x41表示"A"
+\unnnn 				以十六进制代码nnnn表示的一个Unicode字符（其中n为0～F）。例如，\u03a3表示希腊字符Σ
+
+ECMAScript 中的字符串是不可变的，也就是说，字符串一旦创建，它们的值就不能改变。
+要改变某个变量保存的字符串，首先要销毁原来的字符串，然后再用另一个包含新值的字符串填充该变量.
+*/
+console.log("------String--------")
+var text="T\u03a3.\n\t\b\'\"";
+console.log(text.length);//8
+var strCode="今天天气不错ABC";
+console.log(strCode.length);//9
+
+//toString([radix])字符串转换
+/*
+要把一个值转换为一个字符串有两种方式。第一种是使用几乎每个值都有的toString()方法
+数值、布尔值、对象和字符串值（没错，每个字符串也都有一个toString()方法，该方法返回字
+符串的一个副本）都有toString()方法。但null 和undefined 值没有这个方法
+
+radix:进制：2/8/16，次参数只对数字有效
+*/
+var age=11;
+console.log(age.toString(16));//b
+console.log(age.toString(2));//1011
+console.log(age.toString(8));//13
+var found=true;
+console.log(found.toString());//true
+console.log(found.toString(16));//true
+var strToS="11";
+console.log(strToS.toString());//11
+console.log(strToS.toString(2));//11
+
+//String(value)
+/*
+在不知道要转换的值是不是null 或undefined 的情况下，还可以使用转型函数String()，这个
+函数能够将任何类型的值转换为字符串
+规则:
+如果值有toString()方法，则调用该方法（没有参数）并返回相应的结果；
+ 如果值是null，则返回"null"；
+ 如果值是undefined，则返回"undefined"。
+*/
+console.log("-----String(value)------");
+console.log(String(10));//10
+console.log(String(true));//true
+console.log(String(null));//null
+console.log(String(undefined));//undefined
+
+var xxxxx=123;
+console.log(xxxxx.constructor);
+
+
+//Object类型
+/*
+ECMAScript 中的对象其实就是一组数据和功能的集合。
+*/
