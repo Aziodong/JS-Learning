@@ -102,6 +102,7 @@ undefined:NaN
 2.有效的十六进制：转换为对应的十进制
 3.空字符串：0
 4.不满足上述格式：NaN
+转为0的：null,"",false
 对象：
 调用valueOf()然后按照前面规则转换，如果返回NaN则调用toString再按前面规则转换
 */
@@ -115,6 +116,7 @@ console.log("ASD123:"+Number("ASD123"));//NaN
 console.log("0XAF:",Number("0XAF"));//175
 console.log("'':"+Number(""));//0
 console.log("3.12e7:"+Number("3.12e7"));//31200000
+console.log("{}:"+Number({}));//NaN
 
 //paseInt(obj,[radix])
 /*
@@ -216,4 +218,25 @@ console.log(xxxxx.constructor);
 //Object类型
 /*
 ECMAScript 中的对象其实就是一组数据和功能的集合。
+在ECMAScript 中，Object 类型是所有它的实例的基础。换句话说，
+Object 类型所具有的任何属性和方法也同样存在于更具体的对象中。
+Object都具有的属性和方法
+于在ECMAScript 中Object 是所有对象的基础，因此所有对象都具有这些基本的属性和方法。
 */
+console.log('------Object-------')
+//constructor:保存着用于创建当前对象的函数。
+var strObj="123";
+console.log("constructor:"+strObj.constructor);
+//hasOwnProperty(propertyName):用于检查给定的属性在当前对象实例中（而不是在实例的原型中）是否存在。
+console.log("hasOwnProperty(length):"+strObj.hasOwnProperty("length"));//true
+//isPrototypeOf(object):用于检查传入的对象是否是传入对象的原型
+console.log("isPrototypeOf:"+Object.isPrototypeOf(strObj));//false
+//propertyIsEnumerable(propertyName):用于检查给定的属性是否能够使用for-in 语句来枚举。
+console.log("propertyIsEnumerable:"+strObj.propertyIsEnumerable("length"));//false
+//toLocaleString()：返回对象的字符串表示，该字符串与执行环境的地区对应。
+console.log("toLocaleString:"+strObj.toLocaleString());//123
+//toString()：返回对象的字符串表示。
+console.log("toString:"+strObj.toString());//123
+//valueOf()：返回对象的字符串、数值或布尔值表示。
+console.log("valueOf:"+strObj.valueOf());//123
+
