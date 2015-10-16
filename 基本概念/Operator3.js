@@ -54,3 +54,18 @@ console.log(2-{});//NaN
 console.log(Number({}));//NaN
 console.log(2-null);//2
 console.log(2-NaN);//NaN
+
+//相等
+/*
+null == undefined true 
+true == 1 true
+"NaN" == NaN false 
+true == 2 false
+5 == NaN false 
+undefined == 0 false
+NaN == NaN false 
+null == 0 false
+NaN != NaN true 
+"5"==5 true
+false == 0 true
+*/
